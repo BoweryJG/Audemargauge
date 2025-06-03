@@ -25,57 +25,41 @@ export class RoyalOakWatch {
 
     createMaterials() {
         // Rose gold material
-        const roseGold = new THREE.MeshPhysicalMaterial({
+        const roseGold = new THREE.MeshStandardMaterial({
             color: new THREE.Color(0xb76e79),
             metalness: 0.9,
-            roughness: 0.15,
-            clearcoat: 0.3,
-            clearcoatRoughness: 0.1,
-            reflectivity: 1,
-            envMapIntensity: 1.5
+            roughness: 0.15
         });
 
         // Polished rose gold (for certain surfaces)
-        const polishedRoseGold = new THREE.MeshPhysicalMaterial({
+        const polishedRoseGold = new THREE.MeshStandardMaterial({
             color: new THREE.Color(0xb76e79),
             metalness: 0.95,
-            roughness: 0.05,
-            clearcoat: 0.5,
-            clearcoatRoughness: 0.05,
-            reflectivity: 1,
-            envMapIntensity: 2
+            roughness: 0.05
         });
 
         // Blue dial material with tapisserie texture
         const tapisserieTexture = new TapisserieTexture();
-        const blueDial = new THREE.MeshPhysicalMaterial({
+        const blueDial = new THREE.MeshStandardMaterial({
             color: new THREE.Color(0x1a3a52),
             metalness: 0.3,
             roughness: 0.4,
             normalMap: tapisserieTexture.normalMap,
-            normalScale: new THREE.Vector2(0.5, 0.5),
-            displacementMap: tapisserieTexture.heightMap,
-            displacementScale: 0.02,
-            clearcoat: 0.8,
-            clearcoatRoughness: 0.1
+            normalScale: new THREE.Vector2(0.5, 0.5)
         });
 
         // Subdial material (lighter rose gold)
-        const subdialMaterial = new THREE.MeshPhysicalMaterial({
+        const subdialMaterial = new THREE.MeshStandardMaterial({
             color: new THREE.Color(0xd4a574),
             metalness: 0.7,
-            roughness: 0.3,
-            clearcoat: 0.2,
-            clearcoatRoughness: 0.2
+            roughness: 0.3
         });
 
         // Hand material
-        const handMaterial = new THREE.MeshPhysicalMaterial({
+        const handMaterial = new THREE.MeshStandardMaterial({
             color: new THREE.Color(0xb76e79),
             metalness: 0.9,
-            roughness: 0.1,
-            emissive: new THREE.Color(0x00ff00),
-            emissiveIntensity: 0.05
+            roughness: 0.1
         });
 
         return {
@@ -169,8 +153,7 @@ export class RoyalOakWatch {
 
     createDial() {
         // Main dial with tapisserie texture
-        const dialGeometry = new THREE.CircleGeometry(3.7, 64);
-        dialGeometry.computeVertexNormals();
+        const dialGeometry = new THREE.CircleGeometry(3.7, 64, 64);
         
         const dialMesh = new THREE.Mesh(dialGeometry, this.materials.blueDial);
         dialMesh.position.z = 0.4;

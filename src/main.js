@@ -26,8 +26,6 @@ function init() {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
     
     document.getElementById('container').appendChild(renderer.domElement);
 
@@ -79,16 +77,7 @@ function setupLighting() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
     scene.add(ambientLight);
 
-    // Environment map for reflections
-    const pmremGenerator = new THREE.PMREMGenerator(renderer);
-    pmremGenerator.compileEquirectangularShader();
-    
-    // Create a simple studio environment
-    const envScene = new THREE.Scene();
-    envScene.background = new THREE.Color(0xf0f0f0);
-    
-    const envTexture = pmremGenerator.fromScene(envScene).texture;
-    scene.environment = envTexture;
+    // Simple environment for reflections
 }
 
 function onWindowResize() {
